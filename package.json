@@ -7,7 +7,10 @@
     "start:dev": "nodemon --exec 'npx eslint src && node node_modules/.bin/babel-node src/server/index.js'",
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",
-    "start": "node_modules/.bin/babel-node src/server/index.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "yarn run clean && yarn run build-babel",
+    "start": "yarn install && yarn run build && node ./build/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
