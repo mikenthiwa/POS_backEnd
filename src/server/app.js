@@ -6,8 +6,9 @@ import routes from '../routes';
 export default () => {
 	const app = express();
 	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(cors());
-	app.use(routes);
+	app.use('/api/v1', routes());
 	app.use('*', (req, res) => {
 		return res.status(400).json({
 			success: false,
