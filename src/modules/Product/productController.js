@@ -1,6 +1,7 @@
 import models from '../../db/models';
 import { jsonResponse, findItemDb } from '../../helpers';
 import uniqid from 'uniqid';
+import { io } from '../../server';
 
 
 export class Products {
@@ -10,9 +11,13 @@ export class Products {
 			const ProductId = uniqid();
 			const newProduct = await models.Product.findOrCreate({
 				where: { ProductName },
-				defaults: {ProductId, ProductName}
+				defaults: {ProductId, ProductName},
 			});
 			if(newProduct[1]) {
+				const [ created ] = newProduct;
+				io.on('connection', socket => {
+					socket.emit('productAdded', created.get({plain: true}));
+				});
 				return jsonResponse(
 					res, 201, true,
 					'Successfully added'
