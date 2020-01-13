@@ -1,7 +1,8 @@
 import productRoute from '../modules/Product';
+import authRoute from '../modules/Auth';
 
 const routes = () => (
-	productRoute
+	[productRoute, authRoute]
 );
 
 

@@ -2,11 +2,12 @@ import uniqid from 'uniqid';
 import models from '../db/models';
 
 
-export const jsonResponse = (res, status, success, message, data) => (
+export const jsonResponse = (res, status, success, message, data, token) => (
 	res.status(status).json({
 		success,
 		message,
 		data,
+		token
 	})
 );
 
