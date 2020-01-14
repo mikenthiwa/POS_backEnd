@@ -1,27 +1,32 @@
 import express from 'express';
 import { Products } from './productController';
 import { validateInput } from '../validator';
+import { isAuthenticated } from '../../middlware/checkAuth';
 
 const router = express.Router();
 
 router.post(
 	'/create',
+	isAuthenticated,
 	validateInput('create'),
 	Products.addProduct
 );
 
 router.get(
-	'/products',
+	'/yourstore/products*',
+	isAuthenticated,
 	Products.getProducts,
 );
 
 router.get(
-	'/products/:productId/',
+	'/yourstore/products/:productId/',
+	isAuthenticated,
 	Products.getSingleProduct,
 );
 
 router.put(
-	'/products/:productId',
+	'/yourstore/products/:productId',
+	isAuthenticated,
 	validateInput('create'),
 	Products.updateProduct,
 );

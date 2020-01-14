@@ -1,6 +1,18 @@
 import uniqid from 'uniqid';
 import models from '../db/models';
+import jwt from 'jsonwebtoken';
+import env from '../environments';
 
+export const retrieveUserId = async authorization => {
+	const token = authorization.split(' ');
+	const { email } = jwt.verify(token[1], env.secretKey);
+	const user = await models.User.findOne({
+		where: {email},
+		attributes: ['userId']
+	});
+	const { userId } = user.get({plain: true});
+	return userId;
+};
 
 export const jsonResponse = (res, status, success, message, data, token) => (
 	res.status(status).json({
