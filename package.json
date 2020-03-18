@@ -1,0 +1,51 @@
+{
+  "name": "pos_backend",
+  "version": "1.0.0",
+  "description": "Point of Sale API",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon --exec 'npx eslint src && node node_modules/.bin/babel-node src/server/index.js'",
+    "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo": "sequelize db:migrate:undo",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "yarn run clean && yarn run build-babel",
+    "start": "yarn install && yarn run build && node ./build/server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikenthiwa/POS_backEnd.git"
+  },
+  "author": "mikenthiwa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikenthiwa/POS_backEnd/issues"
+  },
+  "homepage": "https://github.com/mikenthiwa/POS_backEnd#readme",
+  "dependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.0.0",
+    "nodemon": "^1.19.4",
+    "pg": "^7.12.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.2",
+    "sequelize-cli": "^5.5.1",
+    "socket.io": "^2.3.0",
+    "uniqid": "^5.1.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0"
+  }
+}
